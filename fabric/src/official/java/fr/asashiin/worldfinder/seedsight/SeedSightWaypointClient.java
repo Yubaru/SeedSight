@@ -17,6 +17,7 @@ import net.minecraft.resources.Identifier;
 public final class SeedSightWaypointClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        validateVisitedBadgeHook();
         WorldFinderWaypoints.registerProvider(new SeedSightWaypointProvider());
         WorldFinderWaypoints.registerProvider(new SeedSightVisitedPoiProvider(false));
         WorldFinderWaypoints.registerProvider(new SeedSightVisitedPoiProvider(true));
@@ -39,5 +40,14 @@ public final class SeedSightWaypointClient implements ClientModInitializer {
                                 return 1;
                             }))));
         });
+    }
+
+    private static void validateVisitedBadgeHook() {
+        try {
+            Class.forName("fr.asashiin.worldfinder.client.WorldFinderScreen", false,
+                    SeedSightWaypointClient.class.getClassLoader());
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException("SeedSight could not load the WorldFinder screen", e);
+        }
     }
 }

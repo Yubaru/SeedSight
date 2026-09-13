@@ -1,4 +1,4 @@
-SeedSight 1.0.1 - Minecraft 26.2 / Fabric
+SeedSight 1.1.0 - Minecraft 26.2 / Fabric
 
 1. Select a Minecraft 26.2 instance using Fabric Loader 0.19.3 or newer.
 2. Install Fabric API 0.158.0+26.2 or newer.
@@ -10,8 +10,8 @@ SeedSight 1.0.1 - Minecraft 26.2 / Fabric
 The waypoint completes after you remain within 12 horizontal blocks briefly. SeedSight plays the
 Minecraft level-up sound and removes it automatically. Use /wf waypoint clear to cancel it.
 
-To record a place you already visited, open that POI's marker menu and choose Check off as visited.
-Open it again and choose Uncheck visited to undo the check. Visited checks are saved separately for
+To record a place you already visited, open that POI's marker menu and choose Not visited - check off.
+Open it again and choose Visited - uncheck to undo the check. Visited checks are saved separately for
 each world or multiplayer server.
 
 Multiplayer seed mapping requires the known server seed.

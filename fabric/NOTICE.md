@@ -1,6 +1,6 @@
 # SeedSight notices
 
-SeedSight 1.0.1 for Minecraft 26.2 includes the official WorldFinder 0.2.1 Fabric release as its
+SeedSight 1.1.0 for Minecraft 26.2 includes the official WorldFinder 0.2.1 Fabric release as its
 map and interface. WorldFinder was created by Asashiin and is licensed under
 `LGPL-3.0-or-later`: https://github.com/Azashiin/WorldFinder
 

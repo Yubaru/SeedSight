@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "fr.asashiin.worldfinder.seedsight.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "RenderedStructureMarkerAccessor",
+    "WorldFinderScreenStatusMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

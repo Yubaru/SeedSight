@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "seedsight",
-  "version": "1.0.1+26.2",
+  "version": "1.1.0+26.2",
   "name": "SeedSight",
   "description": "Find structures and points of interest, then navigate to them with a built-in waypoint HUD.",
   "authors": ["BurBaGlurbus"],
@@ -13,6 +13,7 @@
   "license": "LGPL-3.0-or-later",
   "environment": "client",
   "accessWidener": "worldfinder.accesswidener",
+  "mixins": ["seedsight.mixins.json"],
   "entrypoints": {
     "journeymap": ["fr.asashiin.worldfinder.client.integration.WorldFinderJourneyMapPlugin"],
     "client": [

@@ -18,7 +18,7 @@ public final class SeedSightVisitedPoiProvider implements WaypointProvider {
 
     @Override
     public String displayName() {
-        return undo ? "Uncheck visited" : "Check off as visited";
+        return undo ? "Visited - uncheck" : "Not visited - check off";
     }
 
     @Override

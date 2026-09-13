@@ -28,6 +28,8 @@ public final class VisitedPois {
     private static final Set<VisitKey> VISITED = new HashSet<>();
     private static ClientPacketListener connection;
     private static Path saveFile;
+    private static VisitKey lastChanged;
+    private static long lastChangedAt;
 
     private VisitedPois() {}
 
@@ -48,6 +50,11 @@ public final class VisitedPois {
         return VISITED.contains(new VisitKey(dimension, x, z));
     }
 
+    public static boolean isRecentlyChanged(String dimension, int x, int z) {
+        return new VisitKey(dimension, x, z).equals(lastChanged)
+                && System.nanoTime() - lastChangedAt < 450_000_000L;
+    }
+
     public static boolean setVisited(WaypointRequest request, boolean visited) {
         Minecraft client = Minecraft.getInstance();
         if (client.player == null || client.level == null) return false;
@@ -56,7 +63,11 @@ public final class VisitedPois {
 
         VisitKey key = VisitKey.from(request);
         boolean changed = visited ? VISITED.add(key) : VISITED.remove(key);
-        if (changed) save(client);
+        if (changed) {
+            lastChanged = key;
+            lastChangedAt = System.nanoTime();
+            save(client);
+        }
 
         String state = visited ? "checked off as visited" : "marked unvisited";
         client.player.sendSystemMessage(Component.literal("SeedSight: " + request.name() + " " + state + "."));
@@ -69,6 +80,8 @@ public final class VisitedPois {
         VISITED.clear();
         connection = null;
         saveFile = null;
+        lastChanged = null;
+        lastChangedAt = 0;
     }
 
     private static void load(Minecraft client) {
