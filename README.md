@@ -1,40 +1,71 @@
 # SeedSight
 
-SeedSight is a client-side Fabric mod for Minecraft 26.2. It keeps the official WorldFinder 0.2.1
-map and interface, then adds waypoint navigation and persistent visited checks directly to it.
+SeedSight is a client-side seed map and navigation mod for **Minecraft 26.2 on Fabric**. It retains
+the official WorldFinder 0.2.1 map and interface while adding a built-in waypoint system and
+persistent visited POI tracking.
 
-Press **M**, select a structure or point of interest, and use the original waypoint menu to choose
-**Built-in navigation**. A compact arrow and distance appear above the hotbar. The waypoint is
-saved per world or server, plays Minecraft experience sounds when set, and clears itself with the
-level-up sound after you stay within 12 blocks briefly. Use `/wf waypoint clear` to cancel it.
+Current release: **SeedSight 1.0.0+26.2**
 
-The same marker menu lets you choose **Check off as visited**. Each POI keeps its own saved state
-and gets a small green check on the map; select it again and choose **Uncheck visited** to undo it.
-WorldFinder's original multi-select structure filters remain available for choosing which POI
-types appear on the map.
+## Features
+
+- Open the original WorldFinder map with **M**.
+- Filter multiple structure and POI types from the original side panel.
+- Select a structure, POI, spawn marker, or map location and choose **Built-in navigation**.
+- Follow a compact direction arrow and distance display above the hotbar.
+- Keep the current waypoint after restarting or reconnecting to the same world/server.
+- Complete a waypoint automatically after remaining within 12 horizontal blocks briefly.
+- Hear Minecraft experience sounds when setting, clearing, or reaching a waypoint.
+- Check individual POIs off as visited and see a small green check on their map markers.
+- Uncheck a visited POI later from the same marker menu.
+
+## Requirements
+
+- Minecraft `26.2`
+- Fabric Loader `0.19.3` or newer
+- Fabric API `0.158.0+26.2` or newer
+- Java `25` or newer
 
 ## Install
 
-Install Minecraft 26.2 with Fabric Loader 0.19.3 or newer and Fabric API 0.158.0+26.2 or newer.
-Remove any separate WorldFinder or older SeedSight JAR, then put the SeedSight JAR from
-[`release/`](release/) in the instance's `mods` folder.
+1. Download [`seedsight-1.0.0+26.2.jar`](release/seedsight-1.0.0+26.2.jar).
+2. Remove any previous WorldFinder or SeedSight JAR from the instance's `mods` folder.
+3. Put the SeedSight JAR and Fabric API in the `mods` folder.
+4. Start Minecraft and press **M**.
 
-## Build
+SeedSight is a complete replacement for WorldFinder. Installing both at the same time is blocked
+to prevent duplicate classes and interface conflicts.
 
-Building requires Java 25 or newer:
+## Waypoints and visited POIs
+
+Open a map marker's menu and choose **Built-in navigation** to set it as the active waypoint.
+Setting another destination replaces the current one. Use `/wf waypoint clear` to cancel it.
+
+Choose **Check off as visited** for a location you have already explored. SeedSight stores every
+visited location independently for the current world or multiplayer server. Checked locations get
+a green badge; choose **Uncheck visited** from that marker to remove it.
+
+Singleplayer seeds are detected automatically. On multiplayer servers, the map requires the known
+server seed.
+
+## Build from source
+
+Run from the repository root with Java 25 or newer:
 
 ```powershell
-.\gradlew.bat -p fabric jar
+.\gradlew.bat -p fabric clean jar installBundle
 ```
 
-The Fabric project uses the official WorldFinder 0.2.1 release in `fabric/libs` as its UI and map
-base. The produced JAR is a complete replacement; do not install WorldFinder beside it.
+The finished JAR is written to `fabric/build/libs/`, and the install ZIP is written to
+`fabric/build/distributions/`. The build uses the official WorldFinder 0.2.1 Fabric release in
+`fabric/libs` as the map and UI base.
 
 The loader-neutral WorldFinder API and Core modules remain in `api/` and `common/` for addon
 compatibility.
 
 ## Credits and license
 
-SeedSight modifications are authored by **BurBaGlurbus**. The original WorldFinder project and UI
-are by Asashiin. This project is licensed under `LGPL-3.0-or-later`; see [LICENSE](LICENSE) and
+SeedSight modifications are authored by **BurBaGlurbus**. WorldFinder and its original interface
+were created by [Asashiin](https://github.com/Azashiin/WorldFinder).
+
+SeedSight is licensed under `LGPL-3.0-or-later`. See [LICENSE](LICENSE) and
 [`fabric/NOTICE.md`](fabric/NOTICE.md).
