@@ -1,101 +1,40 @@
-# WorldFinder API and Core
+# SeedSight
 
-This repository contains the loader-neutral libraries used to create compatibility addons for
-WorldFinder. It intentionally contains only the public API, the Minecraft-independent Core, and
-their developer documentation. The WorldFinder mod, its user interface, native Minecraft adapters,
-and Fabric or NeoForge builds are not part of this repository.
+SeedSight is a client-side Fabric mod for Minecraft 26.2. It keeps the official WorldFinder 0.2.1
+map and interface, then adds waypoint navigation and persistent visited checks directly to it.
 
-## Modules
+Press **M**, select a structure or point of interest, and use the original waypoint menu to choose
+**Built-in navigation**. A compact arrow and distance appear above the hotbar. The waypoint is
+saved per world or server, plays Minecraft experience sounds when set, and clears itself with the
+level-up sound after you stay within 12 blocks briefly. Use `/wf waypoint clear` to cancel it.
 
-- `worldfinder-api` is the stable public contract for addons. It defines biome and structure
-  targets, world-generation queries and results, cancellation, capabilities, vertical biome
-  sampling, addon registration, and optional waypoint providers.
-- `worldfinder-core` provides Minecraft-independent map, cache, resolver-chain, and addon
-  orchestration services. It exposes `worldfinder-api` transitively and is intended for advanced
-  integrations and testing tools.
+The same marker menu lets you choose **Check off as visited**. Each POI keeps its own saved state
+and gets a small green check on the map; select it again and choose **Uncheck visited** to undo it.
+WorldFinder's original multi-select structure filters remain available for choosing which POI
+types appear on the map.
 
-Both libraries target Java 21 and contain no Minecraft, Fabric, NeoForge, or map-mod classes.
+## Install
 
-## Using the API
+Install Minecraft 26.2 with Fabric Loader 0.19.3 or newer and Fabric API 0.158.0+26.2 or newer.
+Remove any separate WorldFinder or older SeedSight JAR, then put the SeedSight JAR from
+[`release/`](release/) in the instance's `mods` folder.
 
-Addon projects should compile against the API without bundling it:
+## Build
 
-```groovy
-repositories {
-    maven {
-        url = uri('https://azashiin.github.io/WorldFinder/')
-    }
-    mavenCentral()
-}
-
-dependencies {
-    compileOnly 'fr.asashiin.worldfinder:worldfinder-api:0.2.0'
-}
-```
-
-The installed WorldFinder mod supplies the API at runtime. Addons must declare WorldFinder as a
-required dependency in their Fabric or NeoForge metadata and must not shadow, include, or package
-the API inside their own JAR.
-
-The complete registration, resolver, vertical sampling, threading, and loader metadata contracts
-are documented in [the addon guide](docs/ADDON_API.md).
-
-## Building locally
-
-Windows:
+Building requires Java 25 or newer:
 
 ```powershell
-.\gradlew.bat verifyLibraries
+.\gradlew.bat -p fabric jar
 ```
 
-Linux or macOS:
+The Fabric project uses the official WorldFinder 0.2.1 release in `fabric/libs` as its UI and map
+base. The produced JAR is a complete replacement; do not install WorldFinder beside it.
 
-```bash
-./gradlew verifyLibraries
-```
+The loader-neutral WorldFinder API and Core modules remain in `api/` and `common/` for addon
+compatibility.
 
-The verification task runs API/Core tests, checks the frozen API 0.2 binary surface, validates
-Javadocs, publishes both modules to an isolated Maven repository, resolves them as an external
-consumer, and collects their binary, source, and Javadoc JARs under `build/release/libraries`.
+## Credits and license
 
-To test an unpublished checkout from another project, publish locally with:
-
-```powershell
-.\gradlew.bat publishLibraries
-```
-
-The Maven repository is written to `build/repository` by default. It can be redirected with
-`-Pworldfinder_maven_repository=<directory>`.
-
-Maintainers can publish the versioned Maven metadata and Javadocs through the manual
-`Publish API and Core` GitHub Actions workflow. The generated artifacts are kept on the dedicated
-`developer-pages` branch; generated binaries are never committed to `main`.
-
-## Compatibility policy
-
-`worldfinder-api` preserves source and binary compatibility throughout the `0.2.x` line. Breaking
-changes require a new API line and a documented migration path. `worldfinder-core` remains an
-implementation-oriented library and does not guarantee binary compatibility before 1.0.
-
-An addon must explicitly report unsupported world-generation profiles, dimensions, sampling modes,
-or heights. It must never interpret an unsupported underground request as a surface request or
-return guessed data as an exact result.
-
-### Vanilla baseline and addon ownership
-
-The WorldFinder client always retains the version-specific vanilla reference as its final fallback.
-An addon's handled result replaces or extends the part of generation that addon owns; an unhandled
-query continues through the resolver chain and eventually uses the vanilla engine.
-
-This baseline remains available in local, remote, and modded environments. Remote and unsupported
-world previews use the vanilla structure templates bundled with the matching Minecraft client, so
-a manually entered seed keeps the complete vanilla structure catalog without requiring
-WorldFinder on the server. The result is still a vanilla reference: reproducing custom datapacks or
-modded generation requires a compatibility addon.
-
-The Minecraft-specific fallback implementation and template manager belong to the WorldFinder
-client modules and are intentionally not part of this loader-neutral API/Core repository.
-
-## License
-
-WorldFinder API and Core are licensed under `LGPL-3.0-or-later`. See [LICENSE](LICENSE).
+SeedSight modifications are authored by **BurBaGlurbus**. The original WorldFinder project and UI
+are by Asashiin. This project is licensed under `LGPL-3.0-or-later`; see [LICENSE](LICENSE) and
+[`fabric/NOTICE.md`](fabric/NOTICE.md).

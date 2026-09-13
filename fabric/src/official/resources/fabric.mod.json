@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "seedsight",
+  "version": "1.0.0+26.2",
+  "name": "SeedSight",
+  "description": "Find structures and points of interest, then navigate to them with a built-in waypoint HUD.",
+  "authors": ["BurBaGlurbus"],
+  "contributors": ["Asashiin (original WorldFinder)"],
+  "contact": {
+    "homepage": "https://github.com/Yubaru/SeedSight",
+    "sources": "https://github.com/Yubaru/SeedSight"
+  },
+  "license": "LGPL-3.0-or-later",
+  "environment": "client",
+  "accessWidener": "worldfinder.accesswidener",
+  "mixins": ["seedsight.mixins.json"],
+  "entrypoints": {
+    "journeymap": ["fr.asashiin.worldfinder.client.integration.WorldFinderJourneyMapPlugin"],
+    "client": [
+      "fr.asashiin.worldfinder.fabric.WorldFinderFabricClient",
+      "fr.asashiin.worldfinder.seedsight.SeedSightWaypointClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "fabric-api": ">=0.156.0+26.2",
+    "minecraft": "=26.2",
+    "java": ">=25"
+  },
+  "breaks": {
+    "worldfinder": "*"
+  },
+  "suggests": {
+    "journeymap": "*",
+    "xaerominimap": "*",
+    "xaerobetterpvp": "*"
+  }
+}
