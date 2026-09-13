@@ -4,7 +4,7 @@ SeedSight is a client-side seed map and navigation mod for **Minecraft 26.2 on F
 the official WorldFinder 0.2.1 map and interface while adding a built-in waypoint system and
 persistent visited POI tracking.
 
-Current release: **SeedSight 1.0.0+26.2**
+Current release: **SeedSight 1.0.1+26.2**
 
 ## Features
 
@@ -15,8 +15,8 @@ Current release: **SeedSight 1.0.0+26.2**
 - Keep the current waypoint after restarting or reconnecting to the same world/server.
 - Complete a waypoint automatically after remaining within 12 horizontal blocks briefly.
 - Hear Minecraft experience sounds when setting, clearing, or reaching a waypoint.
-- Check individual POIs off as visited and see a small green check on their map markers.
-- Uncheck a visited POI later from the same marker menu.
+- Check individual POIs off as visited from their marker menu.
+- Recognize a checked POI by its **Uncheck visited** action and undo it at any time.
 
 ## Requirements
 
@@ -27,7 +27,7 @@ Current release: **SeedSight 1.0.0+26.2**
 
 ## Install
 
-1. Download [`seedsight-1.0.0+26.2.jar`](release/seedsight-1.0.0+26.2.jar).
+1. Download [`seedsight-1.0.1+26.2.jar`](release/seedsight-1.0.1+26.2.jar).
 2. Remove any previous WorldFinder or SeedSight JAR from the instance's `mods` folder.
 3. Put the SeedSight JAR and Fabric API in the `mods` folder.
 4. Start Minecraft and press **M**.
@@ -41,8 +41,8 @@ Open a map marker's menu and choose **Built-in navigation** to set it as the act
 Setting another destination replaces the current one. Use `/wf waypoint clear` to cancel it.
 
 Choose **Check off as visited** for a location you have already explored. SeedSight stores every
-visited location independently for the current world or multiplayer server. Checked locations get
-a green badge; choose **Uncheck visited** from that marker to remove it.
+visited location independently for the current world or multiplayer server. A checked location's
+menu changes to **Uncheck visited**, which removes the saved check.
 
 Singleplayer seeds are detected automatically. On multiplayer servers, the map requires the known
 server seed.

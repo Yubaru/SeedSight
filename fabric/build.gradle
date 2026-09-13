@@ -2,7 +2,7 @@ plugins {
     id 'net.fabricmc.fabric-loom' version '1.17.20'
 }
 
-version = '1.0.0+26.2'
+version = '1.0.1+26.2'
 group = 'com.burbaglurbus.seedsight'
 base { archivesName = 'seedsight' }
 
@@ -52,7 +52,7 @@ tasks.register('installBundle', Zip) {
     group = 'distribution'
     description = 'Packages the installable SeedSight mod for Minecraft 26.2.'
     dependsOn tasks.named('jar')
-    archiveFileName = 'seedsight-1.0.0+26.2-install.zip'
+    archiveFileName = 'seedsight-1.0.1+26.2-install.zip'
     destinationDirectory = layout.buildDirectory.dir('distributions')
     into('mods') { from tasks.named('jar') }
     from('INSTALL.txt')

@@ -1,4 +1,4 @@
-SeedSight 1.0.0 - Minecraft 26.2 / Fabric
+SeedSight 1.0.1 - Minecraft 26.2 / Fabric
 
 1. Select a Minecraft 26.2 instance using Fabric Loader 0.19.3 or newer.
 2. Install Fabric API 0.158.0+26.2 or newer.
