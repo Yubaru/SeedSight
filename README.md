@@ -17,6 +17,8 @@ Current release: **SeedSight 1.1.0+26.2**
 - Hear Minecraft experience sounds when setting, clearing, or reaching a waypoint.
 - See a compact red X on unvisited POIs and a green check on visited POIs.
 - Toggle each POI from its marker menu, with a brief badge pulse and Minecraft sound feedback.
+- Press **O** to toggle nearby seed-predicted diamond outlines in the Overworld or ancient-debris
+  outlines in the Nether. Confirmed ore blocks use a brighter, thicker outline.
 
 ## Requirements
 
@@ -46,7 +48,8 @@ a red X, while checked markers show a green check. The marker menu changes to **
 after checking it off.
 
 Singleplayer seeds are detected automatically. On multiplayer servers, the map requires the known
-server seed.
+server seed. The ore overlay uses the same seed currently selected in the map and checks a bounded
+48-block radius around the player; predictions never load or modify chunks.
 
 ## Build from source
 

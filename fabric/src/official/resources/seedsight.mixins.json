@@ -3,8 +3,10 @@
   "package": "fr.asashiin.worldfinder.seedsight.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
+    "FabricEndBiomeHolderEqualityMixin",
     "RenderedStructureMarkerAccessor",
-    "WorldFinderScreenStatusMixin"
+    "WorldFinderScreenStatusMixin",
+    "WorldFinderSeedMixin"
   ],
   "injectors": {
     "defaultRequire": 1

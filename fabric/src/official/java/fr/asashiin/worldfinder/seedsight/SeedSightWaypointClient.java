@@ -12,9 +12,14 @@ import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** Adds navigation while leaving the official WorldFinder client and screen untouched. */
 public final class SeedSightWaypointClient implements ClientModInitializer {
+    static final Logger LOGGER = LoggerFactory.getLogger("SeedSight");
+    private static final OreOverlay ORE_OVERLAY = new OreOverlay();
+
     @Override
     public void onInitializeClient() {
         validateVisitedBadgeHook();
@@ -26,10 +31,13 @@ public final class SeedSightWaypointClient implements ClientModInitializer {
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             BuiltInWaypoints.reset();
             VisitedPois.reset();
+            SeedSightSeedState.reset();
+            ORE_OVERLAY.reset();
         });
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             BuiltInWaypoints.tick(client);
             VisitedPois.tick(client);
+            ORE_OVERLAY.tick(client);
         });
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, context) -> {
             dispatcher.register(ClientCommands.literal("wf")
